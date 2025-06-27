@@ -6,30 +6,29 @@ const screen = {
                     <div class="data">
                         <h1>${user.name ?? "Não possui nome cadastrado 🙁"}</h1>
                         <p>${user.bio ?? "Não possui bio cadastrado 🙁"}</p>
-                        <p>Seguidores: 👥${user.followers}</p>
-                        <p>Seguino: 👤${user.following}</p>
+                        <p>Seguidores: 👥${user.followers ?? "Não possui seguidores"}</p>
+                        <p>Seguino: 👤${user.following ?? "Não está seguindo nimguém"}</p>
                     </div>
                 </div>`
 
         let repositoriesItens = ''
-        user.repositories.forEach(
-            (repo) =>
+        user.repositories.forEach((repo) =>
             (repositoriesItens += `<li>
-          <a href="${repo.html_url}" target="_blank">${repo.name}
-                                    <div class="contadores">
-                                      <p>🍴${repo.fork_count ?? "0"}</p>
-                                      <p>🌟${repo.stargazers_count}</p>
-                                      <p>👀${repo.watchers_count}</p>
-                                      <p>👨‍💻${repo.language ?? "❌"}</p>
-                                    </div></a>
-          </li>`)
+                                        <a href="${repo.html_url}" target="_blank">${repo.name}
+                                            <div class="contadores">
+                                            <p>🍴${repo.fork_count ?? "Sem fork"}</p>
+                                            <p>🌟${repo.stargazers_count ?? "Sem estrelas"}</p>
+                                            <p>👀${repo.watchers_count ?? "Sem visualizações"}</p>
+                                            <p>👨‍💻${repo.language ?? "Sem linguagem de programação"}</p>
+                                        </div></a>
+                                    </li>`)
         )
 
         if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
-                                        <h2>Repositórios</h2>
-                                        <ul>${repositoriesItens}</ul>
-                                     </div>`;
+                                                <h2>Repositórios</h2>
+                                                <ul>${repositoriesItens}</ul>
+                                            </div>`;
         }
 
         let eventsItens = ''
